@@ -14,9 +14,7 @@ function Form() {
     const formData = new FormData(form as HTMLFormElement);
     if (Object.fromEntries(formData).query) {
       console.log(Object.fromEntries(formData).query);
-      router.push(
-        pathname + 'items?query=' + Object.fromEntries(formData).query
-      );
+      router.push(pathname + `{}` + Object.fromEntries(formData).query);
     }
     return;
   };
@@ -25,11 +23,12 @@ function Form() {
     <form
       id='form'
       onSubmit={(e) => handleSearch(e)}
-      className='flex items-center place-content-center'
+      className='flex items-center place-content-center w-fit'
     >
       <Input
         name='query'
         label='Search'
+        size='sm'
         isClearable
         radius='lg'
         classNames={{
@@ -38,7 +37,7 @@ function Form() {
             'bg-transparent',
             'text-black/90 dark:text-white/90',
             'placeholder:text-default-700/50 dark:placeholder:text-white/60',
-            'w-[250px]'
+            'w-640'
           ],
           innerWrapper: 'bg-transparent',
           inputWrapper: [
@@ -59,7 +58,7 @@ function Form() {
       <Button
         color='primary'
         className='hover:brightness-90 ml-4'
-        size='lg'
+        size='md'
         type='submit'
       >
         Search

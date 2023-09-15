@@ -36,7 +36,7 @@ async function Items({ searchParams }: Props) {
 
   return (
     <section className='min-h-screen place-content-center items-center py-20'>
-      <ul className='grid gap-10 w-full md:px-60 place-items-center md:grid-cols-3'>
+      <ul className='grid gap-10 w-full md:px-60 place-items-center lg:grid-cols-2 2xl:grid-cols-3'>
         {products?.filteredProducts?.map((product) => (
           <li key={product.id}>
             <ProductCard

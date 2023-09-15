@@ -14,7 +14,7 @@ export function ProductCard({ title, stock, rating, price, image }: Props) {
   return (
     <Card className='py-4 w-fit'>
       <CardHeader className='pb-0 pt-2 px-4 flex-col items-start'>
-        <h4 className='font-bold text-large'>{title}</h4>
+        <h4 className='font-bold text-large max-w-[280px] truncate'>{title}</h4>
         <p className='text-tiny uppercase font-bold'>{price}</p>
         <small className='text-default-500'>{stock}</small>
         <small className='text-default-500'>{rating}</small>
@@ -23,11 +23,11 @@ export function ProductCard({ title, stock, rating, price, image }: Props) {
       <CardBody className='relative overflow-visible w-fit h-fit'>
         <Image
           isBlurred
-          disableSkeleton
           alt={title}
-          className='rounded-xl h-64 w-96'
+          className='rounded-xl h-64'
           src={image}
-          width={300}
+          height={300}
+          width={280}
         />
       </CardBody>
     </Card>
