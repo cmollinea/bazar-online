@@ -20,14 +20,14 @@ export function ProductCard({ title, stock, rating, price, image }: Props) {
         <small className='text-default-500'>{rating}</small>
       </CardHeader>
 
-      <CardBody className='relative overflow-visible w-96 h-52'>
+      <CardBody className='relative overflow-visible w-96 h-fit'>
         <Image
           isBlurred
           disableSkeleton
           alt={title}
           className='rounded-xl h-64 w-96'
           src={image}
-          width={500}
+          width={400}
         />
       </CardBody>
     </Card>
