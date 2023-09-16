@@ -32,7 +32,7 @@ async function Items({ searchParams }: Props) {
   const query = searchParams.query;
 
   const response = await fetch(
-    `http://localhost:3000/api/items?q=${query ? query : 'all'}`
+    `https://bazar-online-theta.vercel.app/api/items?q=${query ? query : 'all'}`
   );
   const data: Products = await response.json();
 
