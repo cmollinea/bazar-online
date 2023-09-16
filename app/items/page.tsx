@@ -11,7 +11,7 @@ type Props = {
 type Products = {
   status: number;
   message: string;
-  filteredProducts:
+  products:
     | {
         id: number;
         title: string;
@@ -31,13 +31,20 @@ type Products = {
 async function Items({ searchParams }: Props) {
   const query = searchParams.query;
 
-  const response = await fetch(`http://localhost:3000/api/items?q=${query}`);
-  const products: Products = await response.json();
+  const response = await fetch(
+    `http://localhost:3000/api/items?q=${query ? query : 'all'}`
+  );
+  const data: Products = await response.json();
 
   return (
-    <section className='min-h-screen place-content-center items-center py-20'>
-      <ul className='grid gap-10 w-full md:px-60 place-items-center lg:grid-cols-2 2xl:grid-cols-3'>
-        {products?.filteredProducts?.map((product) => (
+    <section className='min-h-screen grid place-content-center items-center py-10'>
+      <p className='text-sm text-default-400'>
+        {data.products?.length && query
+          ? `Showing ${data.products?.length} results for "${query}"`
+          : null}
+      </p>
+      <ul className='grid gap-10 w-full md:px-10 place-items-center md:grid-cols-2 xl:grid-cols-3 py-10'>
+        {data?.products?.map((product) => (
           <li key={product.id}>
             <ProductCard
               title={product.title}

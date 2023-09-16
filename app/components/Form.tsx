@@ -7,36 +7,40 @@ import { useRouter, usePathname } from 'next/navigation';
 function Form() {
   const pathname = usePathname();
   const router = useRouter();
+  console.log('render form');
 
   const handleSearch = (e: FormEvent) => {
     e.preventDefault();
-    const form: EventTarget = e.target;
-    const formData = new FormData(form as HTMLFormElement);
-    if (Object.fromEntries(formData).query) {
-      console.log(Object.fromEntries(formData).query);
-      router.push(pathname + `{}` + Object.fromEntries(formData).query);
+    const formData = new FormData(e.target as HTMLFormElement);
+    const query = Object.fromEntries(formData).query;
+    if (!query) {
+      return;
     }
-    return;
+    if (query && pathname !== '/') {
+      router.push(pathname + `?query=` + query);
+      return;
+    } else {
+      router.push(pathname + 'items?query=' + query);
+      console.log(pathname + 'items?query=' + query);
+    }
   };
 
   return (
     <form
       id='form'
       onSubmit={(e) => handleSearch(e)}
-      className='flex items-center place-content-center w-fit'
+      className='flex items-center place-content-center w-fit px-2'
     >
       <Input
         name='query'
-        label='Search'
         size='sm'
         isClearable
-        radius='lg'
+        radius='sm'
         classNames={{
-          label: 'text-black/50 dark:text-white/90',
           input: [
             'bg-transparent',
             'text-black/90 dark:text-white/90',
-            'placeholder:text-default-700/50 dark:placeholder:text-white/60',
+            'placeholder:text-default-500/50 dark:placeholder:text-white/60',
             'w-640'
           ],
           innerWrapper: 'bg-transparent',
@@ -53,12 +57,12 @@ function Form() {
             '!cursor-text'
           ]
         }}
-        placeholder='Type to search...'
+        placeholder='What are you looking for?'
       />
       <Button
-        color='primary'
-        className='hover:brightness-90 ml-4'
-        size='md'
+        color='default'
+        className='hover:brightness-90 ml-2'
+        size='sm'
         type='submit'
       >
         Search

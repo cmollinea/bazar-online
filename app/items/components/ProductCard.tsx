@@ -1,6 +1,11 @@
 'use client';
-import { Card, CardHeader, CardBody, Image } from '@nextui-org/react';
-import NextImage from 'next/image';
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  Image,
+  CardFooter
+} from '@nextui-org/react';
 
 type Props = {
   title: string;
@@ -12,24 +17,38 @@ type Props = {
 
 export function ProductCard({ title, stock, rating, price, image }: Props) {
   return (
-    <Card className='py-4 w-fit'>
-      <CardHeader className='pb-0 pt-2 px-4 flex-col items-start'>
-        <h4 className='font-bold text-large max-w-[280px] truncate'>{title}</h4>
-        <p className='text-tiny uppercase font-bold'>{price}</p>
-        <small className='text-default-500'>{stock}</small>
-        <small className='text-default-500'>{rating}</small>
+    <Card isPressable isFooterBlurred className='p-4 w-fit relative'>
+      <CardHeader className='pb-0 flex-col items-start py-2'>
+        <h4 className='font-bold text-xl max-w-[280px] max-sm:max-w-[200px] truncate'>
+          {title}
+        </h4>
+        <p className='text-medium uppercase font-bold'>${price} USD</p>
+        <small
+          className={`${
+            stock > 20
+              ? ' text-success-400'
+              : stock > 10
+              ? 'text-warning-400'
+              : 'text-danger-400'
+          }`}
+        >
+          {stock} left in stock
+        </small>
       </CardHeader>
 
-      <CardBody className='relative overflow-visible w-fit h-fit'>
-        <Image
-          isBlurred
-          alt={title}
-          className='rounded-xl h-64'
-          src={image}
-          height={300}
-          width={280}
-        />
-      </CardBody>
+      <Image
+        isBlurred
+        alt={title}
+        className='max-w-[300px] max-sm:max-w-[250px] max-h-[180px]'
+        src={image}
+        width={500}
+        height={281}
+      />
+
+      <CardFooter className='absolute z-20 bottom-4 left-4 w-full h-10 p-1'>
+        {' '}
+        <small className='text-default-500'>{rating}</small>
+      </CardFooter>
     </Card>
   );
 }

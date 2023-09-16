@@ -6,10 +6,10 @@ type Props = {
   children: ReactNode;
 };
 
-function layout({ children }: Props) {
+function Layout({ children }: Props) {
   return (
     <>
-      <nav className='flex justify-between items-center py-4 backdrop-blur-xl border-b border-b-slate-200/20 sticky top-0 left-0 right-0 z-10'>
+      <nav className='flex justify-between items-center py-4 backdrop-blur-xl border-b border-b-slate-200/20 sticky top-0 left-0 right-0 z-50'>
         <Logo />
         <Form />
       </nav>
@@ -17,4 +17,4 @@ function layout({ children }: Props) {
     </>
   );
 }
-export default layout;
+export default Layout;
