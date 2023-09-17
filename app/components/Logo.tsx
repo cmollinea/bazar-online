@@ -11,7 +11,7 @@ function Logo() {
       {' '}
       <svg
         viewBox='0 0 1024 1024'
-        className={`icon ${pathname === '/' ? ' w-40 h-40' : 'w-14 h-14'}`}
+        className={`icon ${pathname === '/' ? ' w-40 h-40' : 'w-14 h-14 ml-2'}`}
         version='1.1'
         xmlns='http://www.w3.org/2000/svg'
       >

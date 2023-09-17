@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import React from 'react';
 import { ProductCard } from './components/ProductCard';
+import { NO_QUERY_PROVIDED } from '../constants/filters';
 
 type Props = {
   searchParams: {
@@ -8,41 +9,34 @@ type Props = {
   };
 };
 
-type Products = {
-  status: number;
-  message: string;
-  products:
-    | {
-        id: number;
-        title: string;
-        description: string;
-        price: number;
-        discountPercentage: number;
-        rating: number;
-        stock: number;
-        brand: string;
-        category: string;
-        thumbnail: string;
-        images: string[];
-      }[]
-    | null;
-};
-
 async function Items({ searchParams }: Props) {
   const query = searchParams.query;
-
   const response = await fetch(
-    `https://bazar-online-theta.vercel.app/api/items?q=${query ? query : 'all'}`
+    `http://localhost:3000/api/items?q=${query ? query : NO_QUERY_PROVIDED}`
   );
-  const data: Products = await response.json();
+
+  const data: ProductsResponse = await response.json();
 
   return (
-    <section className='min-h-screen grid place-content-center items-center py-10'>
-      <p className='text-sm text-default-400'>
-        {data.products?.length && query
-          ? `Showing ${data.products?.length} results for "${query}"`
-          : null}
+    <section className='min-h-screen items-center py-10'>
+      <p className='text-sm text-default-500 w-full text-center'>
+        {data?.products?.length && query
+          ? `Showing ${data?.total} results for "${query}"`
+          : `Showing ${data?.total} products`}
       </p>
+      <p className='text-sm text-default-500 w-full text-center px-10 mt-4'>
+        Categories:
+      </p>
+      <ul className='flex items-center md:place-content-center gap-2 mt-2 px-10 overflow-x-auto snap-x scrollbar-hide'>
+        {data?.categories?.map((category) => (
+          <li
+            key={category}
+            className='text-xs flex-none rounded-lg p-2 bg-default-100 backdrop-blur-md'
+          >
+            {category}
+          </li>
+        ))}
+      </ul>
       <ul className='grid gap-10 w-full md:px-10 place-items-center md:grid-cols-2 xl:grid-cols-3 py-10'>
         {data?.products?.map((product) => (
           <li key={product.id}>
@@ -52,6 +46,7 @@ async function Items({ searchParams }: Props) {
               price={product.price}
               image={product.thumbnail}
               rating={product.rating}
+              id={product.id}
             />
           </li>
         ))}
