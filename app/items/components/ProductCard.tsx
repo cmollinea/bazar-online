@@ -42,10 +42,10 @@ export function ProductCard({ title, stock, rating, price, image, id }: Props) {
         <Image
           isBlurred
           alt={title}
-          className='max-w-[300px] max-sm:max-w-[250px] max-h-[180px]'
+          className='max-w-[320px] max-sm:max-w-[250px] max-h-[180px]'
           src={image}
           width={500}
-          height={281}
+          height={285}
         />
         <CardFooter className='absolute flex items-center gap-1 z-20 bottom-4 h-10 p-1 w-[calc(100%_-_31px)] bg-default/80'>
           {' '}
