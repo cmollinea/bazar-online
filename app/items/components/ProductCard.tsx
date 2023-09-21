@@ -1,12 +1,6 @@
 'use client';
 import Star from '@/app/components/Icons/Star';
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  Image,
-  CardFooter
-} from '@nextui-org/react';
+import { Card, CardHeader, Image, CardFooter } from '@nextui-org/react';
 import Link from 'next/link';
 
 type Props = {
@@ -20,8 +14,15 @@ type Props = {
 
 export function ProductCard({ title, stock, rating, price, image, id }: Props) {
   return (
-    <Link href={`/items/${id}`}>
-      <Card isPressable isFooterBlurred className='p-4 w-fit relative'>
+    <Link href={`/items/${id}`} prefetch={false}>
+      <Card
+        isPressable
+        isFooterBlurred
+        className='p-4 w-fit relative '
+        classNames={{
+          base: 'border border-transparent hover:border-default-400 transition-colors duration-500 ease-in-out md:min-h-[315px]'
+        }}
+      >
         <CardHeader className='pb-0 flex-col items-start py-2'>
           <h4 className='font-bold text-xl max-w-[280px] max-sm:max-w-[200px] truncate'>
             {title}
@@ -42,7 +43,7 @@ export function ProductCard({ title, stock, rating, price, image, id }: Props) {
         <Image
           isBlurred
           alt={title}
-          className='max-w-[320px] max-sm:max-w-[250px] max-h-[180px]'
+          className='max-w-[300px] max-sm:max-w-[250px] max-h-[180px]'
           src={image}
           width={500}
           height={285}

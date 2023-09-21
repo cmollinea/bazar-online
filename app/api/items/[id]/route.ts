@@ -20,8 +20,16 @@ export async function GET(request: Request, { params }: Props) {
     });
   }
 
-  return NextResponse.json({
-    status: 403,
-    message: 'Bad Request'
+  const res = {
+    status: 404,
+    message: `We can't find that product`
+  };
+
+  return new Response(JSON.stringify(res), {
+    status: 404,
+    statusText: 'Product Not Found',
+    headers: {
+      'content-type': 'application/json'
+    }
   });
 }
