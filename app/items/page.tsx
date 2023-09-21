@@ -2,6 +2,10 @@ import { NextResponse } from 'next/server';
 import React from 'react';
 import { ProductCard } from './components/ProductCard';
 import { NO_QUERY_PROVIDED } from '../constants/filters';
+import { getProducts } from '../services/getProducts';
+import { Badge } from '@nextui-org/react';
+import BadgeParent from './components/BadgeParent';
+import { Metadata } from 'next';
 
 type Props = {
   searchParams: {
@@ -9,13 +13,34 @@ type Props = {
   };
 };
 
+export async function generateMetadata({
+  searchParams
+}: Props): Promise<Metadata> {
+  const query = searchParams.query;
+  console.log(query);
+
+  if (query) {
+    return {
+      title: `eBazar | Showing results for ${query}`,
+      description: 'Advanced Search of eBazar'
+    };
+  } else {
+    return {
+      title: 'eBazar | All Products'
+    };
+  }
+}
+
 async function Items({ searchParams }: Props) {
   const query = searchParams.query;
-  const response = await fetch(
-    `http://localhost:3000/api/items?q=${query ? query : NO_QUERY_PROVIDED}`
-  );
+  const URL =
+    process.env.NODE_ENVIROMENT === 'dev'
+      ? `http://localhost:3000/api/items?q=${query ? query : NO_QUERY_PROVIDED}`
+      : `https://bazar-online-theta.vercel.app/api/items?q=${
+          query ? query : NO_QUERY_PROVIDED
+        }`;
 
-  const data: ProductsResponse = await response.json();
+  const data = await getProducts<ProductsResponse>(URL);
 
   return (
     <section className='min-h-screen items-center py-10'>
@@ -33,11 +58,19 @@ async function Items({ searchParams }: Props) {
             key={category}
             className='text-xs flex-none rounded-lg p-2 bg-default-100 backdrop-blur-md'
           >
-            {category}
+            <BadgeParent
+              content={
+                data.products?.filter(
+                  (product) => product.category === category
+                ).length
+              }
+            >
+              {category}
+            </BadgeParent>
           </li>
         ))}
       </ul>
-      <ul className='grid gap-4 w-full place-items-center mx-auto md:grid-cols-2 xl:grid-cols-3  py-10 px-10'>
+      <ul className='grid gap-4 w-fit mx-auto md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4  py-10 px-10'>
         {data?.products?.map((product) => (
           <li key={product.id}>
             <ProductCard

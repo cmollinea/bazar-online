@@ -10,16 +10,16 @@ export async function GET(request: Request) {
 
   if (query === NO_QUERY_PROVIDED) {
     const categories = getProductCategories(DATA.products);
+
     return NextResponse.json({
       status: 200,
-      message: 'No query Provided',
+      message: 'Showing all products',
       products: DATA.products,
       categories: categories,
       total: DATA.products.length
     });
   } else if (query) {
     const filteredProducts = filterByQuery(query, DATA.products);
-
     const categories = getProductCategories(filteredProducts);
     return NextResponse.json({
       status: 200,

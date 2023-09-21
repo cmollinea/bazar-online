@@ -30,11 +30,12 @@ function Form() {
     <form
       id='form'
       onSubmit={(e) => handleSearch(e)}
-      className='flex border-sm items-center place-content-center w-fit px-2 mr-4'
+      className='flex border-sm items-center place-content-center w-fit px-2'
     >
       <Input
         name='query'
         size='md'
+        autoComplete='off'
         isClearable
         radius='sm'
         placeholder='What are you looking for?'

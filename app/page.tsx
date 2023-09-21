@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import Form from './components/Form';
 import Logo from './components/Logo';
 
@@ -7,6 +8,12 @@ function Home() {
       <Logo />
       <h1 className='text-5xl font-bold pb-6'> eBAZAR</h1>
       <Form />
+      <Link
+        className=' text-default-400 underline hover:text-primary mt-4'
+        href='/items'
+      >
+        <small>View all products</small>
+      </Link>
     </section>
   );
 }
