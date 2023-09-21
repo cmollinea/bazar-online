@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const URL =
     process.env.NODE_ENVIROMENT === 'dev'
       ? `http://localhost:3000/api/items/${id}`
-      : `https://ebazar-online.vercel.app/api/items/${id}`;
+      : `https://bazar-online-theta.vercel.app/api/items/${id}`;
 
   const data = await getProducts<ProductInfoResponse>(URL);
 
