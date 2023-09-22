@@ -18,15 +18,14 @@ export async function GET(request: Request) {
       categories: categories,
       total: DATA.products.length
     });
-  } else if (query) {
-    const filteredProducts = filterByQuery(query, DATA.products);
-    const categories = getProductCategories(filteredProducts);
-    return NextResponse.json({
-      status: 200,
-      message: 'OK',
-      products: filteredProducts,
-      categories: categories,
-      total: filteredProducts.length
-    });
   }
+  const filteredProducts = filterByQuery(query as string, DATA.products);
+  const categories = getProductCategories(filteredProducts);
+  return NextResponse.json({
+    status: 200,
+    message: 'OK',
+    products: filteredProducts,
+    categories: categories,
+    total: filteredProducts.length
+  });
 }

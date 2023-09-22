@@ -11,20 +11,20 @@ type Props = {
   };
 };
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const id = params.id;
-  const URL =
-    process.env.NODE_ENVIROMENT === 'dev'
-      ? `http://localhost:3000/api/items/${id}`
-      : `https://bazar-online-theta.vercel.app/api/items/${id}`;
+//export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  //const id = params.id;
+  //const URL =
+    //process.env.NODE_ENVIROMENT === 'dev'
+      //? `http://localhost:3000/api/items/${id}`
+      //: `https://bazar-online-theta.vercel.app/api/items/${id}`;
 
-  const data = await getProducts<ProductInfoResponse>(URL);
+  //const data = await getProducts<ProductInfoResponse>(URL);
 
-  return {
-    title: `eBazar | ${data?.product?.title}`,
-    description: `${data?.product?.description}`
-  };
-}
+  //return {
+    //title: `eBazar | ${data?.product?.title}`,
+   // description: `${data?.product?.description}`
+  //};
+//}
 
 async function ProductInfo({ params }: Props) {
   const id = params.id;
