@@ -36,7 +36,7 @@ async function Items({ searchParams }: Props) {
   const URL =
     process.env.NODE_ENVIROMENT === 'dev'
       ? `http://localhost:3000/api/items?q=${query ? query : NO_QUERY_PROVIDED}`
-      : `https://bazar-online-theta.vercel.app/api/items?q=${
+      : `https://cuban-bazar.vercel.app/api/items?q=${
           query ? query : NO_QUERY_PROVIDED
         }`;
 
