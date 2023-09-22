@@ -1,8 +1,8 @@
 import Star from '@/app/components/Icons/Star';
 import { getProducts } from '@/app/services/getProducts';
-import { Products } from '@/types/products_type';
 import { ProductInfoResponse } from '@/types/product_info_response._type';
 import { Metadata } from 'next';
+import AddToCartButton from './components/AddToCartButton';
 import ImagesContainer from './components/ImagesContainer';
 
 type Props = {
@@ -60,9 +60,27 @@ async function ProductInfo({ params }: Props) {
             images: data?.product?.images
           }}
         />
-        <p className='text-4xl'>
-          <strong>${data?.product?.price} USD</strong>
+        <p className='text-lg'>
+          <del> ${data?.product?.price} USD</del>
+          {data?.product?.discountPercentage && (
+            <sub className='text-xs text-danger-400 px-2'>
+              {data?.product?.discountPercentage}% off
+            </sub>
+          )}
         </p>
+        {data?.product?.price && data.product.discountPercentage ? (
+          <p className='text-4xl'>
+            <strong>
+              {' '}
+              {Math.ceil(
+                data?.product?.price -
+                  (data?.product?.discountPercentage * data?.product?.price) /
+                    100
+              ) - 0.01}{' '}
+              USD
+            </strong>
+          </p>
+        ) : null}
         <p
           className={`${
             (data?.product?.stock as number) < 10
@@ -91,6 +109,7 @@ async function ProductInfo({ params }: Props) {
           </span>
           {data?.product?.description}
         </p>
+        <AddToCartButton />
       </div>
     </section>
   );
