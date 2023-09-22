@@ -17,10 +17,9 @@ export default function RootLayout({
       <body>
         <Providers>{children}</Providers>
         <footer className='h-10 flex items-center place-content-center'>
-          <a href='https://www.freepik.com/free-vector/online-shopping-concept-landing-page_5358350.htm#query=online%20shopping&position=1&from_view=keyword&track=ais'>
-            Image by pikisuperstar
-          </a>{' '}
-          on Freepik
+          <a href='https://storyset.com/shopping'>
+            Shopping illustrations by Storyset
+          </a>
         </footer>
       </body>
     </html>
