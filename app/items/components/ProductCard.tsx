@@ -14,7 +14,7 @@ type Props = {
 
 export function ProductCard({ title, stock, rating, price, image, id }: Props) {
   return (
-    <Link href={`/items/${id}`} prefetch={false}>
+    <Link href={`/items/${id}`}>
       <Card
         isPressable
         isFooterBlurred
