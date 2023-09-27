@@ -2,10 +2,10 @@
 
 import { Button } from '@nextui-org/react';
 import { useCartStore } from '@/app/store/store';
-import { Products } from '@/types/products_type';
+import { Product } from '@/types/product_type';
 
 type Props = {
-  product?: Products;
+  product?: Product;
 };
 
 function AddToCartButton({ product }: Props) {
@@ -18,7 +18,7 @@ function AddToCartButton({ product }: Props) {
     <div>
       <Button
         disabled={isInShoppingCart}
-        onClick={() => addToCart(product as Products)}
+        onClick={() => addToCart(product as Product)}
         className='mt-4 font-bold w-full'
         color={isInShoppingCart ? 'default' : 'primary'}
       >

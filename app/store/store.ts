@@ -1,4 +1,4 @@
-import type { Product } from '@/types/Product_type';
+import type { Product } from '@/types/product_type';
 import { ICartProduct } from '@/types/cart_product.interface';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';

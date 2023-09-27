@@ -1,7 +1,7 @@
 import Star from '@/app/components/Icons/Star';
 import { devBaseUrl, prodBaseUrl } from '@/app/constants/baseUrl';
 import { getProducts } from '@/app/services/getProducts';
-import { ProductInfoResponse } from '@/types/product_info_response._type';
+import { ProductInfoResponse } from '@/types/product_info_response_type';
 import { Metadata } from 'next';
 import { ratingStarts } from '@/app/constants/ratingStars';
 import AddToCartButton from './components/AddToCartButton';
