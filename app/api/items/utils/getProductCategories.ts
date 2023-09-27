@@ -1,6 +1,6 @@
-import { Products } from '@/types/product_type';
+import { Product } from '@/types/product_type';
 
-export const getProductCategories = (products: Products[]): string[] => {
+export const getProductCategories = (products: Product[]): string[] => {
   const categoriesArr = products.map((product) => {
     return product.category;
   });

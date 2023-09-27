@@ -1,9 +1,9 @@
-import { Products } from '@/types/product_type';
+import { Product } from '@/types/product_type';
 
 export const filterByQuery = (
   query: string,
-  products: Products[]
-): Products[] | [] => {
+  products: Product[]
+): Product[] | [] => {
   const filteredProducts = products.filter(
     (product) =>
       product.title.toLowerCase().includes(query.toLowerCase()) ||

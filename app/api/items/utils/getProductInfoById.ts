@@ -1,9 +1,9 @@
-import { Products } from '@/types/product_type';
+import { Product } from '@/types/product_type';
 
 export const getProductInfoById = (
   id: string,
-  products: Products[]
-): Products | undefined => {
+  products: Product[]
+): Product | undefined => {
   const productFromId = products.find(
     (product) => product.id.toString() === id
   );
