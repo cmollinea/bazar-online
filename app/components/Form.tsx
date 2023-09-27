@@ -8,7 +8,6 @@ import SearchIcon from './Icons/SearchIcon';
 function Form() {
   const pathname = usePathname();
   const router = useRouter();
-  console.log('render form');
 
   const handleSearch = (e: FormEvent) => {
     e.preventDefault();
@@ -22,7 +21,6 @@ function Form() {
       return;
     } else {
       router.push(pathname + 'items?query=' + query);
-      console.log(pathname + 'items?query=' + query);
     }
   };
 

@@ -1,9 +1,9 @@
 type Props = {
-  rating: number;
+  rating?: number;
   count: number;
 };
 
-function Star({ rating, count }: Props) {
+function Star({ rating = 0, count }: Props) {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'

@@ -1,9 +1,8 @@
-import { NextResponse } from 'next/server';
 import React from 'react';
+import { devBaseUrl, prodBaseUrl } from '@/app/constants/baseUrl';
 import { ProductCard } from './components/ProductCard';
 import { NO_QUERY_PROVIDED } from '../constants/filters';
 import { getProducts } from '../services/getProducts';
-import { Badge } from '@nextui-org/react';
 import BadgeParent from './components/BadgeParent';
 import { Metadata } from 'next';
 
@@ -17,7 +16,6 @@ export async function generateMetadata({
   searchParams
 }: Props): Promise<Metadata> {
   const query = searchParams.query;
-  console.log(query);
 
   if (query) {
     return {
@@ -35,10 +33,8 @@ async function Items({ searchParams }: Props) {
   const query = searchParams.query;
   const URL =
     process.env.NODE_ENVIROMENT === 'dev'
-      ? `http://localhost:3000/api/items?q=${query ? query : NO_QUERY_PROVIDED}`
-      : `https://cuban-bazar.vercel.app/api/items?q=${
-          query ? query : NO_QUERY_PROVIDED
-        }`;
+      ? devBaseUrl + '?q=' + (query || NO_QUERY_PROVIDED)
+      : prodBaseUrl + '?q=' + (query || NO_QUERY_PROVIDED);
 
   const data = await getProducts<ProductsResponse>(URL);
 

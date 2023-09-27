@@ -1,7 +1,9 @@
 import Star from '@/app/components/Icons/Star';
+import { devBaseUrl, prodBaseUrl } from '@/app/constants/baseUrl';
 import { getProducts } from '@/app/services/getProducts';
 import { ProductInfoResponse } from '@/types/product_info_response._type';
 import { Metadata } from 'next';
+import { ratingStarts } from '@/app/constants/ratingStars';
 import AddToCartButton from './components/AddToCartButton';
 import ImagesContainer from './components/ImagesContainer';
 
@@ -15,8 +17,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const id = params.id;
   const URL =
     process.env.NODE_ENVIROMENT === 'dev'
-      ? `http://localhost:3000/api/items/${id}`
-      : `https://bazar-online-theta.vercel.app/api/items/${id}`;
+      ? devBaseUrl + '/' + id
+      : prodBaseUrl + '/' + id;
 
   const data = await getProducts<ProductInfoResponse>(URL);
 
@@ -28,15 +30,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 async function ProductInfo({ params }: Props) {
   const id = params.id;
-
   const URL =
     process.env.NODE_ENVIROMENT === 'dev'
-      ? `http://localhost:3000/api/items/${id}`
-      : `https://cuban-bazar.vercel.app/api/items/${id}`;
-
-  console.log(URL);
+      ? devBaseUrl + '/' + id
+      : prodBaseUrl + '/' + id;
 
   const data = await getProducts<ProductInfoResponse>(URL);
+
+  if (!data?.product) {
+    return 404;
+  }
 
   return (
     <section className='min-h-screen py-10 px-10'>
@@ -44,11 +47,9 @@ async function ProductInfo({ params }: Props) {
         <h1 className='text-2xl'>{data?.product?.title}</h1>
         {data?.product && (
           <div className='flex gap-0.5 items-center'>
-            <Star count={1} rating={data?.product?.rating} />
-            <Star count={2} rating={data?.product?.rating} />
-            <Star count={3} rating={data?.product?.rating} />
-            <Star count={4} rating={data?.product?.rating} />
-            <Star count={5} rating={data?.product?.rating} />
+            {ratingStarts.map((star) => (
+              <Star key={star} rating={data.product?.rating} count={star} />
+            ))}
             <small className='text-default-500 ml-1'>
               {data?.product?.rating} out of 5.0
             </small>
@@ -109,7 +110,7 @@ async function ProductInfo({ params }: Props) {
           </span>
           {data?.product?.description}
         </p>
-        <AddToCartButton />
+        <AddToCartButton product={data?.product} />
       </div>
     </section>
   );
