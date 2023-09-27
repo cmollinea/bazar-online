@@ -1,7 +1,7 @@
 'use client';
 
 import { FormEvent } from 'react';
-import { Input, Button } from '@nextui-org/react';
+import { Input } from '@nextui-org/react';
 import { useRouter, usePathname } from 'next/navigation';
 import SearchIcon from './Icons/SearchIcon';
 

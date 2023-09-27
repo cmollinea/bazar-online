@@ -1,4 +1,4 @@
-import { Products } from '@/types/products_type';
+import { Products } from '@/types/product_type';
 
 export const getProductCategories = (products: Products[]): string[] => {
   const categoriesArr = products.map((product) => {

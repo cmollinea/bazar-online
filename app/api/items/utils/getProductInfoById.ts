@@ -1,4 +1,4 @@
-import { Products } from '@/types/products_type';
+import { Products } from '@/types/product_type';
 
 export const getProductInfoById = (
   id: string,

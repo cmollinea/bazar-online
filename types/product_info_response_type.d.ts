@@ -1,7 +1,7 @@
-import { Products } from './products_type';
+import { Product } from './product_type';
 
 export type ProductInfoResponse = {
   status: number;
   message: string;
-  product?: Products;
+  product?: Product;
 };
