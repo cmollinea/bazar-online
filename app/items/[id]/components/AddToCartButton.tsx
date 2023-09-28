@@ -11,11 +11,12 @@ type Props = {
 function AddToCartButton({ product }: Props) {
   const shoppingCart = useCartStore((state) => state.shoppingCart);
   const addToCart = useCartStore((state) => state.addToCart);
+  const removeFromCart = useCartStore((state) => state.removeFromCart);
 
   const isInShoppingCart = shoppingCart.some((item) => item.id === product?.id);
 
   return (
-    <div>
+    <div className='flex flex-col items-center min-h-[100px]'>
       <Button
         disabled={isInShoppingCart}
         onClick={() => addToCart(product as Product)}
@@ -24,6 +25,14 @@ function AddToCartButton({ product }: Props) {
       >
         {isInShoppingCart ? 'Already in cart' : 'Add to cart'}
       </Button>
+      {isInShoppingCart && (
+        <span
+          onClick={() => removeFromCart(product?.id as number)}
+          className='underline hover:text-danger-400 text-sm mt-4 cursor-pointer'
+        >
+          Dismiss
+        </span>
+      )}
     </div>
   );
 }

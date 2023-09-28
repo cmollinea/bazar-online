@@ -34,7 +34,7 @@ export const useCartStore = create<CartState>()(
       },
 
       incrementProductQuantity: (product: ICartProduct) => {
-        const newShoppingCart = structuredClone(get().shoppingCart);
+        const newShoppingCart = [...get().shoppingCart];
         const productIndex = newShoppingCart.findIndex(
           (item) => item.id === product.id
         );
@@ -46,7 +46,7 @@ export const useCartStore = create<CartState>()(
 
       decreaseProductQuantity: (product: ICartProduct) => {
         if (product.quantity > 1) {
-          const newShoppingCart = structuredClone(get().shoppingCart);
+          const newShoppingCart = [...get().shoppingCart];
           const productIndex = newShoppingCart.findIndex(
             (item) => item.id === product.id
           );
