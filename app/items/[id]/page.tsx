@@ -6,6 +6,7 @@ import { Metadata } from 'next';
 import { ratingStarts } from '@/app/constants/ratingStars';
 import AddToCartButton from './components/AddToCartButton';
 import ImagesContainer from './components/ImagesContainer';
+import GoBack from '@/app/components/GoBack';
 
 type Props = {
   params: {
@@ -42,7 +43,8 @@ async function ProductInfo({ params }: Props) {
   }
 
   return (
-    <section className='min-h-screen py-10 px-10'>
+    <section className='min-h-screen relative pt-16 pb-8 px-10'>
+      <GoBack />
       <div className='grid gap-1 justify-center'>
         <h1 className='text-2xl'>{data?.product?.title}</h1>
         {data?.product && (

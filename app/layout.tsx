@@ -17,7 +17,7 @@ export default function RootLayout({
     <html className='dark' lang='en'>
       <body>
         <Providers>{children}</Providers>
-        <footer className='h-20 flex flex-col gap-2 border-t border-slate-200/20 rounded-t-xl items-center place-content-center'>
+        <footer className='h-20 z-20 relative bg-black flex flex-col gap-2 border-t border-slate-200/20 rounded-t-xl items-center place-content-center'>
           <p className='text-sm'>
             Made with 💙 by{' '}
             <a className='underline hover:text-primary-400 cursor-pointer'>
